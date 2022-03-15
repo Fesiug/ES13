@@ -1,5 +1,6 @@
 
 $modelname "es13/player/player.mdl"
+$scale 0.4
 
 $bodygroup "reference"
 {

@@ -11,6 +11,8 @@ SWEP.DrawCrosshair = false
 SWEP.ViewModel = nil
 SWEP.WorldModel = nil
 
+SWEP.DrawWorldModel = false
+
 -- right hand
 SWEP.Primary.ClipSize		= -1
 SWEP.Primary.DefaultClip	= 0
