@@ -1,0 +1,10 @@
+Patch
+{
+	include materials/es13/world/ref.vmt
+	insert
+	{
+		$basetexture				"es13/world/power/apc"
+		$surfaceprop				computer
+	$reflectivity "[1 1 1]"
+	}
+}

@@ -1,0 +1,11 @@
+"es13"
+{
+	"base"		"base"
+	"title"		"ES 13"
+	"maps"		"^es13_"
+	"category"	"other"
+	"menusystem"	"1"
+	"settings"
+	{
+	}
+}

@@ -1,0 +1,7 @@
+unlitgeneric
+{
+	$basetexture "skybox/es13blackLF"
+	$hdrcompressedtexture "skybox/es13blackLF"
+	$nofog 1
+	$ignorez 1
+}

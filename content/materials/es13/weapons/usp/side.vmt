@@ -1,0 +1,5 @@
+VertexLitGeneric
+{
+	"$basetexture" "es13/weapons/usp/side"
+	"$bumpmap" "dev/flat_normal"
+}

@@ -1,0 +1,5 @@
+VertexLitGeneric
+{
+	"$basetexture" "es13/weapons/hands/handfinal256"
+	"$bumpmap" "dev/flat_normal"
+}

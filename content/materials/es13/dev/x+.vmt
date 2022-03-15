@@ -1,0 +1,8 @@
+patch
+{
+	include		materials\es13\basemdl.vmt
+	insert
+	{
+		$basetexture			"es13/dev/x+"
+	}
+}
