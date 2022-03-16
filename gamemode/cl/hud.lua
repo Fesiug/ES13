@@ -274,7 +274,7 @@ hook.Add("HUDPaint", "ES_HUDPaint", function()
 	end
 
 	local w, h = 1600, 900
-	if (CamStyle == 2) and (w > h)  then -- Make sure you aren't playing the iOS version, of course
+	if false and (CamStyle == 2) and (w > h)  then -- Make sure you aren't playing the iOS version, of course
 		local thing = (w - h) / 2
 
 		surface.SetDrawColor(0, 0, 0, 255)
