@@ -137,9 +137,12 @@ ES.WeaponList = {
 		["BulletInfo"] = {
 			Num = 1,
 			Spread = Vector( 0.05, 0.05, 0 ),
-			Tracer = 1,
-			Force = 1,
-			Damage = 40,
+			Tracer = 0,
+			Force = 0,
+			Damage = 25,	-- Max damage
+			Range = 10 * 64,		-- Max damage
+			DamageMin = 20,	-- Min damage
+			RangeMin = 5 * 64,	-- Min damage
 		},
 
 		["Viewmodel"] = "models/es13/weapons/v_deagle.mdl",
@@ -230,7 +233,7 @@ ES.WeaponList = {
 		["Worldmodel"] = "models/weapons/w_pist_deagle.mdl",
 	},
 	["p90"] = {
-		["Print Name"] = "SX57",
+		["Print Name"] = "SM-57",
 		["Clip Start"] = 40,
 		["Clip Reloaded"] = 40,
 		["Clip Max"] = 40,
@@ -306,7 +309,7 @@ ES.WeaponList = {
 		["Worldmodel"] = "models/weapons/w_pist_deagle.mdl",
 	},
 	["mp9"] = {
-		["Print Name"] = "SX9 III",
+		["Print Name"] = "SM-9 III",
 		["Clip Start"] = 24,
 		["Clip Reloaded"] = 24,
 		["Clip Max"] = 24,
@@ -403,7 +406,7 @@ ES.WeaponList = {
 		["Worldmodel"] = "models/weapons/w_smg_mp5.mdl",
 	},
 	["radio"] = {
-		["Print Name"] = "Handheld radio",
+		["Print Name"] = "Handheld",
 
 		["Weapon"] = false,
 		

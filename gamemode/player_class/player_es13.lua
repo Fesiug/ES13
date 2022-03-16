@@ -27,6 +27,11 @@ function PLAYER:SetupDataTables()
 	self.Player:NetworkVar( "Float", 5, "HP_LLeg" )
 	self.Player:NetworkVar( "Float", 6, "HP_RLeg" )
 
+	self.Player:NetworkVar( "Float", 7, "HP_Brute" )
+	self.Player:NetworkVar( "Float", 8, "HP_Burn" )
+	self.Player:NetworkVar( "Float", 9, "HP_Toxins" )
+	self.Player:NetworkVar( "Float", 10, "HP_Oxygen" )
+
 	self.Player:SetDesiredSpeed(3)
 
 	--self.Player:SetWEPRH("usp")
@@ -42,6 +47,13 @@ function PLAYER:Init()
 
 	self.Player:SetViewOffset(Vector(0, 0, 44))
 	self.Player:SetViewOffsetDucked(Vector(0, 0, 30))
+
+	if SERVER then self.Player:SetBloodColor( DONT_BLEED ) end
+end
+
+function PLAYER:Spawn()
+	self.Player:SetHP_Brute(0)
+	self.Player:SetHP_Brute(0)
 end
 
 player_manager.RegisterClass( "player_es13", PLAYER, "player_default" )

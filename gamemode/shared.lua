@@ -13,14 +13,6 @@ if SERVER then for i, fil in ipairs( file.Find( "es13/gamemode/sv/*.lua", "LUA" 
 	include( "sv/" .. fil )
 end end
 
--- Shared
-for i, fil in ipairs( file.Find( "es13/gamemode/sh/*.lua", "LUA" ) ) do
-	if SERVER then
-		AddCSLuaFile( "sh/" .. fil )
-	end
-	include( "sh/" .. fil )
-end
-
 -- Client
 for i, fil in ipairs( file.Find( "es13/gamemode/cl/*.lua", "LUA" ) ) do
 	if SERVER then
@@ -28,6 +20,14 @@ for i, fil in ipairs( file.Find( "es13/gamemode/cl/*.lua", "LUA" ) ) do
 	elseif CLIENT then
 		include( "cl/" .. fil )
 	end
+end
+
+-- Shared
+for i, fil in ipairs( file.Find( "es13/gamemode/sh/*.lua", "LUA" ) ) do
+	if SERVER then
+		AddCSLuaFile( "sh/" .. fil )
+	end
+	include( "sh/" .. fil )
 end
 
 
@@ -49,8 +49,20 @@ local speeds = {
 	[3] = 200,
 }
 
-hook.Add( "Move", "testestst", function( ply, mv, usrcmd )
-	if mv:KeyPressed( IN_SPEED ) then godcam = !godcam end
+hook.Add( "CreateMove", "ES13_CreateMove", function( cmd )
+	if IsValid(SuperPanel) and SuperPanel:IsDown() then
+		cmd:AddKey( IN_ATTACK )
+	end
+end )
+
+hook.Add( "Move", "testestst", function( ply, mv )
+	if mv:KeyPressed( IN_SPEED ) then
+		if (CamStyle == 2) then
+			CamStyle = 0
+		else
+			CamStyle = 2
+		end
+	end
 	local speed = mv:GetMaxSpeed() * speeds[ply:GetDesiredSpeed()]
 	mv:SetMaxSpeed( speed )
 	mv:SetMaxClientSpeed( speed )
@@ -68,6 +80,22 @@ hook.Add( "StartCommand", "ES_StartCommand", function( ply, cmd )
 			ply:SetDesiredSpeed(math.Clamp(desired, 1, 3))
 		end
 	end
+	
+	if CLIENT and ((CamStyle == 1) or (CamStyle == 2)) and vgui.CursorVisible() then
+		--[[local tr = util.TraceLine( {
+			start = EyePos(),
+			endpos = 
+		} )]]
+		--local tr = util.AimVector(EyeAngles(), LocalPlayer():GetFOV(), cmd:GetMouseX(), cmd:GetMouseY(), ScrW(), ScrH())
+		local posInQuotationMarks = Vector( ply:GetPos().x, ply:GetPos().y, 0 ) + Vector( 0, 0, 1024 )
+		local tr = util.QuickTrace(posInQuotationMarks, gui.ScreenToVector(gui.MousePos()),LocalPlayer())
+
+		local meme = (tr.HitPos - posInQuotationMarks):Angle()
+		meme.x = 0
+		
+		cmd:SetViewAngles( meme )
+	end
+
 end )
 
 local walk = {
@@ -144,30 +172,39 @@ end
 
 -- Server
 hook.Add( "PlayerSay", "CharCount", function( ply, text )
-	local hand = 0
-	text = string.lower( text )
-	if ( string.Left(text, 3) == "/r " ) then
-		text = string.sub(text, 4)
-		hand = 1
-	elseif ( string.Left(text, 3) == "/l " ) then
-		text = string.sub(text, 4)
-		hand = 2
-	end
+	if epicwin then
+		local hand = 0
+		text = string.lower( text )
+		if ( string.Left(text, 3) == "/r " ) then
+			text = string.sub(text, 4)
+			hand = 1
+		elseif ( string.Left(text, 3) == "/l " ) then
+			text = string.sub(text, 4)
+			hand = 2
+		end
 
-	if hand == 1 then
-		ply:SetWEPRH(text)
-		timer.Simple(0.15, function()
-			ESWcontact()
-			ply:SendLua("ESWcontact()")
-		end)
-	elseif hand == 2 then
-		ply:SetWEPLH(text)
-		timer.Simple(0.15, function()
-			ESWcontact()
-			ply:SendLua("ESWcontact()")
-		end)
+		if hand == 1 then
+			ply:SetWEPRH(text)
+			timer.Simple(0.15, function()
+				ESWcontact()
+				ply:SendLua("ESWcontact()")
+			end)
+		elseif hand == 2 then
+			ply:SetWEPLH(text)
+			timer.Simple(0.15, function()
+				ESWcontact()
+				ply:SendLua("ESWcontact()")
+			end)
+		else
+		end
 	else
+		ply:ChatPrint( "You cannot use this type of chat!" )
+		return ""
 	end
+end )
+
+hook.Add( "PlayerCanHearPlayersVoice", "ES13_NoVoice", function( listener, talker )
+	return false
 end )
 
 if SERVER then util.AddNetworkString("gimmedna") end

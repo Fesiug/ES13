@@ -337,10 +337,75 @@ end
 function SWEP:SetNextHandDelay(v)
 end
 
+--[[ local function BulletCallback( atk, tr, dmg )
+	-- Thank you Arctic, very cool
+	local ent = tr.Entity
+
+	dmg:SetDamage( self.Stats["Projectiles"]["Damage"]:GetMax() )
+	dmg:SetDamageType(DMG_BULLET)
+
+	if IsValid(ent) then
+		local d = dmg:GetDamage()
+		local min, max = self.Stats["Projectiles"]["Air Damage Range"]:GetMin(), self.Stats["Projectiles"]["Air Damage Range"]:GetMax()
+		local range = atk:GetPos():Distance(ent:GetPos())
+		local XD = 0
+		if range < min then
+			XD = 0
+		else
+			XD = math.Clamp((range - min) / (max - min), 0, 1)
+		end
+
+		dmg:SetDamage( self.Stats["Projectiles"]["Damage"]:Lerp(1-XD) )
+	end
+
+	if ent:IsPlayer() then
+		local d = dmg:GetDamage()
+		dmg:SetDamage(0)
+		if SERVER then ent:SetHP_Brute(ent:GetHP_Brute() - d) end
+	end
+	return
+end]]
+
+local function BulletCallback( atk, bullet )
+	return
+end
+
+
+
 function SWEP:ShootBullets(bullet)
 	bullet.Src = self.Owner:GetShootPos()
 	bullet.Dir = self.Owner:GetAimVector()
+	bullet.Callback = function( atk, tr, dmg )
+		-- Thank you Arctic, very cool
+		local ent = tr.Entity
 
+		dmg:SetDamage( bullet.Damage )
+		dmg:SetDamageType(DMG_BULLET)
+
+		if IsValid(ent) then
+			local d = dmg:GetDamage()
+			local min, max = bullet.RangeMin, bullet.Range
+			local range = atk:GetPos():Distance(ent:GetPos())
+			local XD = 0
+			if range < min then
+				XD = 0
+			else
+				XD = math.Clamp((range - min) / (max - min), 0, 1)
+			end
+
+			print( range, min, max )
+
+			dmg:SetDamage( Lerp( 1-XD, bullet.DamageMin, bullet.Damage ) )
+		end
+
+		if ent:IsPlayer() then
+			local d = dmg:GetDamage()
+			dmg:SetDamage(0)
+			if SERVER then ent:SetHP_Brute(ent:GetHP_Brute() + d) end
+		end
+		return
+	end
+	
 	self:GetOwner():FireBullets( bullet )
 end
 
@@ -371,6 +436,7 @@ function SWEP:Weapon_Attack(tabl, index)
 
 	self:ShootBullets(ta["BulletInfo"])
 
+	return true
 end
 
 function SWEP:PrimaryAttack()
