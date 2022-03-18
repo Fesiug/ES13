@@ -8,8 +8,8 @@ PLAYER.DisplayName			= "Default Class"
 PLAYER.WalkSpeed			= 115
 PLAYER.RunSpeed				= 115
 PLAYER.JumpPower			= 0--245
-PLAYER.DuckSpeed			= 0
-PLAYER.UnDuckSpeed			= 0
+PLAYER.DuckSpeed			= 0.06
+PLAYER.UnDuckSpeed			= 0.06
 PLAYER.CrouchedWalkSpeed	= 1
 
 function PLAYER:SetupDataTables()

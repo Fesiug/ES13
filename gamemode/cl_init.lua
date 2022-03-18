@@ -297,7 +297,6 @@ function GM:CalcView( ply, pos, angles, fov )
 		local amt = math.abs(angles.p)/90
 		local amt2 = 1-(math.abs(angles.p)/90)
 
-		local timb = math.Clamp(CurTime() - lasttimelanded, 0, 0.5)*2
 
 		local view = {
 			origin = (pos*amt2)+(at.Pos*amt),
@@ -305,9 +304,8 @@ function GM:CalcView( ply, pos, angles, fov )
 			--fov = 90,
 			drawviewer = false,
 		}
-		if !ply:OnGround() then
-			view.origin = at.Pos
-		end
+		if !ply:OnGround() then view.origin = at.Pos end
+		local timb = math.Clamp(CurTime() - lasttimelanded, 0, 0.5)*2
 		view.origin = (at.Pos*(1-timb)) + (view.origin*(timb))
 		view.origin = (view.origin)*(tr.Fraction) + ((pos)*(1-tr.Fraction))
 
@@ -331,13 +329,11 @@ function GM:CalcView( ply, pos, angles, fov )
 
 			view.drawviewer = true
 			view.angles = Angle( 90, 90, 0 )
-			view.fov = 64--loost[1]
-			--view.fov = 102
+			view.fov = 64
 			--view.fov = Convert( 64, (9/16) ) -- Punish widescreen
 
 			local posInQuotationMarks = ply:GetPos() - Vector( 0, 0, 0.031250 ) --Vector( ply:GetPos().x, ply:GetPos().y, 0 )
 			view.origin = posInQuotationMarks + Vector( 0, 0, 1024 )
-			--view.origin = posInQuotationMarks + Vector( 0, 0, 512 )
 		elseif (CamStyle == 1) then
 			view.drawviewer = true
 			view.angles = welook

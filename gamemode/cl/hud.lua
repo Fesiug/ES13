@@ -273,7 +273,7 @@ hook.Add("HUDPaint", "ES_HUDPaint", function()
 		surface.DrawRect(x - (thick/2), y - (thick/2), thick, thick)
 	end
 
-	if true then
+	if false then
 		local w, h = ScrW()/2, ScrH()/2
 
 		surface.DrawCircle(w, h, 3, 255, 255, 255, 255)
