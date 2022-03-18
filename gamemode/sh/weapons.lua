@@ -400,6 +400,98 @@ ES.WeaponList = {
 		},
 		["Worldmodel"] = "models/weapons/w_pist_deagle.mdl",
 	},
+	["famas"] = {
+		["Print Name"] = "ARM-64 MRB",
+		["Clip Start"] = 25,
+		["Clip Reloaded"] = 25,
+		["Clip Max"] = 25,
+		
+		["Weapon"] = true,
+		["Fire Delay"] = 0.13,
+		["Fire Max Burst"] = math.huge,
+		["Fire Sound"] = {
+			{
+				s = "es13/weapons/famas-1.wav",
+				c = CHAN_STATIC,
+				p = 100
+			},
+		},
+
+		["BulletInfo"] = {
+			Num = 1,
+			Spread = Vector( 0.04, 0.04, 0 ),
+			Tracer = 0,
+			Force = 0,
+			Damage = 14,	-- Max damage
+			Range = 10 * 64,		-- Max damage
+			DamageMin = 10,	-- Min damage
+			RangeMin = 5 * 64,	-- Min damage
+		},
+
+		["Viewmodel"] = "models/es13/weapons/v_famas.mdl",
+		["ViewmodelAnims"] = {
+			["idle"] = {
+				NAME = "idle",
+			},
+			["empty_idle"] = {
+				NAME = "idle",
+			},
+			["shoot"] = {
+				NAME = "shoot",
+				EVENTS = {
+					[0.03] = {
+						snd = { { s = "es13/weapons/famas_boltslap.wav", c = CHAN_WEAPON } },
+					},
+				},
+			},
+			["empty_shoot"] = {
+				NAME = "shoot",
+				EVENTS = {
+					[0.03] = {
+						snd = { { s = "es13/weapons/famas_forearm.wav", c = CHAN_STATIC } },
+					},
+				},
+			},
+			["reload"] = {
+				NAME = "reload",
+				MISC = {
+					HandDelay = 2.3,
+					--GlobalDelay = 0
+				},
+				EVENTS = {
+					[0.4] = {
+						snd = { { s = "es13/weapons/famas_clipout.wav", c = CHAN_STATIC } },
+					},
+					[1] = {
+						snd = { { s = "es13/weapons/famas_clipin.wav", c = CHAN_STATIC } },
+					},
+				},
+			},
+			["empty_reload"] = {
+				NAME = "empty_reload",
+				MISC = {
+					HandDelay = 2.3,
+					--GlobalDelay = 0
+				},
+				EVENTS = {
+					[0.4] = {
+						snd = { { s = "es13/weapons/famas_clipout.wav", c = CHAN_STATIC } },
+					},
+					[1] = {
+						snd = { { s = "es13/weapons/famas_clipin.wav", c = CHAN_STATIC } },
+					},
+					[1.8] = {
+						snd = { { s = "es13/weapons/famas_boltpull.wav", c = CHAN_STATIC } },
+					},
+				},
+			},
+			["draw"] = {
+				NAME = "draw",
+				EVENTS = {},
+			},
+		},
+		["Worldmodel"] = "models/weapons/w_pist_deagle.mdl",
+	},
 	["oddball"] = {
 		["Print Name"] = "Oddball",
 
