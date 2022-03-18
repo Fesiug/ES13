@@ -313,15 +313,15 @@ ehtml:Dock( FILL )
 
 
 local we = { ["!"] = {"exclaims", "shouts", "yells"}, ["?"] = {"asks"} }
-if !dickfill then dickfill = {} end
-table.Empty(dickfill)
+if !ChatHistory then ChatHistory = {} end
+-- table.Empty(ChatHistory)
 
 function ehtml:Updoot()
-	local niggaball = ""
-	for i, v in ipairs( dickfill ) do
-		niggaball = niggaball .. v
+	local OneString = ""
+	for i, v in ipairs( ChatHistory ) do
+		OneString = OneString .. v
 	end
-	ehtml:SetHTML( "<body onLoad=\"window.scroll(0, 99999999999)\">" .. (dark and s_dark or s_light) .. deebug .. niggaball .. preview )
+	ehtml:SetHTML( "<body onLoad=\"window.scroll(0, 99999999999)\">" .. (dark and s_dark or s_light) .. deebug .. OneString .. preview )
 end
 ehtml:Updoot()
 
@@ -354,7 +354,7 @@ textentry.OnEnter = function( self )
 	forbiddenknowledge = forbiddenknowledge .. "\"" .. self:GetText() .. "\""
 	forbiddenknowledge = forbiddenknowledge .. "</span><br>"
 
-	table.insert(dickfill, forbiddenknowledge)
+	table.insert(ChatHistory, forbiddenknowledge)
 
 	self:SetText("")
 	preview = ""
