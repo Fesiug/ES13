@@ -196,9 +196,24 @@ hook.Add("PreDrawEffects", "ES_" .. "PreDrawEffects", function()
 			if IsValid(vm) then
 				cam.Start3D(nil, nil, nil)
 					cam.IgnoreZ(true)
+						local p, a = EyePos(), EyeAngles()
+						local pos, ang = Vector(p.x, p.y, p.z), Angle(a.p, a.y, a.r)
+
+						local speed = ( LocalPlayer():GetVelocity():Length() / 200 )
+
+						off = Vector()
+						off.x = math.sin( CurTime() * math.pi * 2.5 )						* 0.333 * speed
+						off.z = ( math.cos( math.sin( CurTime() * math.pi * 2.5 ) ) - 0.5 )	* -0.5 * speed
+
+						superoffset = Vector()
+						superoffset = superoffset + ( ang:Right() * off.x )
+						superoffset = superoffset + ( ang:Forward() * off.y )
+						superoffset = superoffset + ( ang:Up() * off.z )
 					
-						vm:SetPos(EyePos())
-						vm:SetAngles(EyeAngles())
+						pos:Add(superoffset)
+
+						vm:SetPos( pos )
+						vm:SetAngles( ang )
 						vm:DrawModel()
 
 					cam.IgnoreZ(false)

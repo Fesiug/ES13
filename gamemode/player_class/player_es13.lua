@@ -5,11 +5,12 @@ local PLAYER = {}
 
 PLAYER.DisplayName			= "Default Class"
 
-PLAYER.WalkSpeed			= 1
-PLAYER.RunSpeed				= 1
+PLAYER.WalkSpeed			= 115
+PLAYER.RunSpeed				= 115
 PLAYER.JumpPower			= 0--245
-PLAYER.DuckSpeed			= 0.2
-PLAYER.UnDuckSpeed			= 0.2
+PLAYER.DuckSpeed			= 0
+PLAYER.UnDuckSpeed			= 0
+PLAYER.CrouchedWalkSpeed	= 1
 
 function PLAYER:SetupDataTables()
 	self.Player:NetworkVar( "String", 0, "WEPRH" )
@@ -43,17 +44,22 @@ end
 
 function PLAYER:Init()
 	self.Player:SetHull( Vector(-16, -16, 0), Vector(16, 16, 40) )
-	self.Player:SetHullDuck( Vector(-16, -16, 0), Vector(16, 16, 30) )
-
 	self.Player:SetViewOffset(Vector(0, 0, 44))
-	self.Player:SetViewOffsetDucked(Vector(0, 0, 30))
+
+	self.Player:SetHullDuck( Vector(-16, -16, 0), Vector(16, 16, 40) )
+	self.Player:SetViewOffsetDucked(Vector(0, 0, 44))
+
+	--self.Player:SetHullDuck( Vector(-16, -16, 0), Vector(16, 16, 30) )
+	--self.Player:SetViewOffsetDucked(Vector(0, 0, 30))
 
 	if SERVER then self.Player:SetBloodColor( DONT_BLEED ) end
 end
 
 function PLAYER:Spawn()
 	self.Player:SetHP_Brute(0)
-	self.Player:SetHP_Brute(0)
+	self.Player:SetHP_Burn(0)
+	self.Player:SetHP_Toxins(0)
+	self.Player:SetHP_Oxygen(0)
 end
 
 player_manager.RegisterClass( "player_es13", PLAYER, "player_default" )

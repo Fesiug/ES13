@@ -27,6 +27,8 @@ function GM:HUDDrawTargetID()
 		text = trace.Entity:Nick()
 	elseif trace.Entity.GetPrintName then
 		text = trace.Entity:GetPrintName()
+	elseif trace.Entity.PrintName then
+		text = trace.Entity.PrintName
 	else
 		text = trace.Entity:GetClass()
 	end

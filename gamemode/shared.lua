@@ -50,8 +50,12 @@ local speeds = {
 }
 
 hook.Add( "CreateMove", "ES13_CreateMove", function( cmd )
-	if IsValid(SuperPanel) and SuperPanel:IsDown() then
-		cmd:AddKey( IN_ATTACK )
+	if IsValid(SuperPanel) then -- Stuff doesn't work with gui clicker
+		if input.IsMouseDown( MOUSE_LEFT ) then
+			cmd:AddKey( IN_ATTACK )
+		elseif input.IsMouseDown( MOUSE_RIGHT ) then
+			cmd:AddKey( IN_ATTACK2 )
+		end
 	end
 end )
 
@@ -63,7 +67,8 @@ hook.Add( "Move", "testestst", function( ply, mv )
 			CamStyle = 2
 		end
 	end
-	local speed = mv:GetMaxSpeed() * speeds[ply:GetDesiredSpeed()]
+	
+	local speed = speeds[ply:GetDesiredSpeed()]
 	mv:SetMaxSpeed( speed )
 	mv:SetMaxClientSpeed( speed )
 end )
@@ -81,12 +86,7 @@ hook.Add( "StartCommand", "ES_StartCommand", function( ply, cmd )
 		end
 	end
 	
-	if CLIENT and ((CamStyle == 1) or (CamStyle == 2)) and vgui.CursorVisible() then
-		--[[local tr = util.TraceLine( {
-			start = EyePos(),
-			endpos = 
-		} )]]
-		--local tr = util.AimVector(EyeAngles(), LocalPlayer():GetFOV(), cmd:GetMouseX(), cmd:GetMouseY(), ScrW(), ScrH())
+	if CLIENT and (CamStyle == 2) and IsValid(SuperPanel) then
 		local posInQuotationMarks = Vector( ply:GetPos().x, ply:GetPos().y, 0 ) + Vector( 0, 0, 1024 )
 		local tr = util.QuickTrace(posInQuotationMarks, gui.ScreenToVector(gui.MousePos()),LocalPlayer())
 
@@ -95,7 +95,6 @@ hook.Add( "StartCommand", "ES_StartCommand", function( ply, cmd )
 		
 		cmd:SetViewAngles( meme )
 	end
-
 end )
 
 local walk = {

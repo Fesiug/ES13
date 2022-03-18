@@ -18,9 +18,12 @@ ES.WeaponList = {
 		["BulletInfo"] = {
 			Num = 1,
 			Spread = Vector( 0.02, 0.02, 0 ),
-			Tracer = 1,
-			Force = 1,
-			Damage = 30,
+			Tracer = 0,
+			Force = 0,
+			Damage = 14,	-- Max damage
+			Range = 10 * 64,		-- Max damage
+			DamageMin = 10,	-- Min damage
+			RangeMin = 5 * 64,	-- Min damage
 		},
 
 		["Viewmodel"] = "models/es13/weapons/v_usp.mdl",

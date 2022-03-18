@@ -393,8 +393,6 @@ function SWEP:ShootBullets(bullet)
 				XD = math.Clamp((range - min) / (max - min), 0, 1)
 			end
 
-			print( range, min, max )
-
 			dmg:SetDamage( Lerp( 1-XD, bullet.DamageMin, bullet.Damage ) )
 		end
 

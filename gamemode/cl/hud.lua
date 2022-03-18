@@ -273,6 +273,12 @@ hook.Add("HUDPaint", "ES_HUDPaint", function()
 		surface.DrawRect(x - (thick/2), y - (thick/2), thick, thick)
 	end
 
+	if true then
+		local w, h = ScrW()/2, ScrH()/2
+
+		surface.DrawCircle(w, h, 3, 255, 255, 255, 255)
+	end
+
 	local w, h = 1600, 900
 	if false and (CamStyle == 2) and (w > h)  then -- Make sure you aren't playing the iOS version, of course
 		local thing = (w - h) / 2

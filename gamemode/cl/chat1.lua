@@ -1,146 +1,210 @@
 
 
 
-local BetaChannelsInfo = {
+BetaChannelsInfo =
+{
 	radio_min = 1200,
 	radio_max = 1600,
 	public_min = 1441,
 	public_max = 1489,
 }
 
-local BetaChannels =
+local function hex2rgb(hex)
+	hex = hex:gsub("#","")
+	return Color( tonumber( "0x" .. hex:sub(1, 2) ), tonumber( "0x" .. hex:sub(3, 4) ), tonumber( "0x" .. hex:sub(5, 6) ) )
+end
+local colorlookup =
+{
+	["radio"]			=	hex2rgb("408010"),
+	["deptradio"]		=	hex2rgb("993399"),
+	["comradio"]		=	hex2rgb("204090"),
+	["syndradio"]		=	hex2rgb("6D3F40"),
+	["dsquadradio"]		=	hex2rgb("686868"),
+	["resteamradio"]	=	hex2rgb("18BC46"),
+	["airadio"]			=	hex2rgb("FF00FF"),
+	["centradio"]		=	hex2rgb("5C5C7C"),
+	["secradio"]		=	hex2rgb("A30000"),
+	["engradio"]		=	hex2rgb("A66300"),
+	["medradio"]		=	hex2rgb("009190"),
+	["sciradio"]		=	hex2rgb("993399"),
+	["supradio"]		=	hex2rgb("7F6539"),
+	["srvradio"]		=	hex2rgb("80A000"),
+	["proradio"]		=	hex2rgb("E3027A"),
+}
+
+BetaChannels =
 {
 	["common"] = {
 		name = "Common",
-		color = Color(64, 128, 16),
+		color = colorlookup["radio"],
 		style = "radio",
 		freq = 1459,
 	},
 	["security"] = {
 		name = "Security",
-		color = Color(64, 128, 16),
+		color = colorlookup["secradio"],
 		style = "secradio",
 		freq = 1359,
 	},
 		["security_internal"] = {
 			name = "Security Internal",
-			color = Color(64, 128, 16),
+			color = colorlookup["secradio"],
 			style = "secradio",
 			freq = 1475,
 		},
 	["command"] = {
 		name = "Command",
-		color = Color(64, 128, 16),
+		color = colorlookup["comradio"],
 		style = "comradio",
 		freq = 1353,
 	},
 	["ai"] = {
-		name = "AI",
-		color = Color(64, 128, 16),
+		name = "AI Private",
+		color = colorlookup["airadio"],
 		style = "airadio",
 		freq = 1343,
 	},
 	["engineering"] = {
 		name = "Engineering",
-		color = Color(64, 128, 16),
+		color = colorlookup["engradio"],
 		style = "engradio",
 		freq = 1357,
 	},
 	["science"] = {
 		name = "Science",
-		color = Color(64, 128, 16),
+		color = colorlookup["sciradio"],
 		style = "sciradio",
 		freq = 1351,
 	},
 	["medical"] = {
 		name = "Medical",
-		color = Color(64, 128, 16),
+		color = colorlookup["medradio"],
 		style = "medradio",
 		freq = 1355,
 	},
 		["medical_internal"] = {
 			name = "Medical Internal",
-			color = Color(64, 128, 16),
+			color = colorlookup["medradio"],
 			style = "medradio",
 			freq = 1485,
 		},
 	["supply"] = {
 		name = "Supply",
-		color = Color(64, 128, 16),
+		color = colorlookup["supradio"],
 		style = "supradio",
 		freq = 1347,
 	},
 	["service"] = {
 		name = "Service",
-		color = Color(64, 128, 16),
+		color = colorlookup["srvradio"],
 		style = "srvradio",
 		freq = 1349,
 	},
 	["procedure"] = {
 		name = "Procedure",
-		color = Color(64, 128, 16),
-		style = "procradio",
+		color = colorlookup["proradio"],
+		style = "proradio",
 		freq = 1339,
 	},
 	["ert"] = {
-		name = "ERT",
-		color = Color(64, 128, 16),
+		name = "Response Team",
+		color = colorlookup["centradio"],
 		style = "centradio",
 		freq = 1345,
 	},
 	["dth"] = {
-		name = "Deathsquad",
-		color = Color(64, 128, 16),
+		name = "Special Ops",
+		color = colorlookup["centradio"],
 		style = "centradio",
 		freq = 1341,
 	},
 	["synd"] = {
 		name = "Syndicate",
-		color = Color(64, 128, 16),
+		color = colorlookup["syndradio"],
 		style = "syndradio",
 		freq = 1213,
 	},
 	["syndteam"] = {
 		name = "Syndicate Team",
-		color = Color(64, 128, 16),
+		color = colorlookup["syndradio"],
 		style = "syndradio",
 		freq = 1244,
 	},
 }
 
-local function hex2rgb(hex)
-	hex = hex:gsub("#","")
-	return Color( tonumber( "0x" .. hex:sub(1, 2) ), tonumber( "0x" .. hex:sub(3, 4) ), tonumber( "0x" .. hex:sub(5, 6) ) )
-end
 
-local BetaColors = {
-	["hobo"] = {
-		name = "Common",
-		color = Color(64, 128, 16),
-	},
-	["service"] = {
-		name = "Service",
-		color = hex2rgb("80A000"),
-	},
-}
-
-local BetaJobs =
+BetaJobs =
 {
+	["command_captain"] = {
+		name = "Captain",
+		color = colorlookup["comradio"],
+		style = "comradio",
+	},
+	["command_personnel"] = {
+		name = "Head of Personnel",
+		color = colorlookup["comradio"],
+		style = "comradio",
+	},
+	["command_blueshield"] = {
+		name = "Blueshield",
+		color = colorlookup["comradio"],
+		style = "comradio",
+	},
+	["command_representative"] = {
+		name = "Nanotrasen Representative",
+		color = colorlookup["comradio"],
+		style = "comradio",
+	},
 	["assistant"] = {
 		name = "Assistant",
-		color = Color(64, 128, 16),
+		color = colorlookup["radio"],
 		style = "radio",
 	},
-	["librarian"] = {
+	["service_librarian"] = {
 		name = "Librarian",
-		color = BetaColors["service"].color,
+		color = colorlookup["srvradio"],
 		style = "srvradio",
 	},
 	["ai"] = {
 		name = "AI",
-		color = Color(255, 0, 255),
+		color = colorlookup["airadio"],
 		style = "airadio",
 	},
+	["security_officer"] = {
+		name = "Security Officer",
+		color = colorlookup["secradio"],
+		style = "secradio",
+	},
+	["security_head"] = {
+		name = "Head of Security",
+		color = colorlookup["secradio"],
+		style = "secradio",
+	},
+	["security_warden"] = {
+		name = "Warden",
+		color = colorlookup["secradio"],
+		style = "secradio",
+	},
+}
+
+JK_Command = {
+	["command_captain"]				= true,
+	["command_personnel"]			= true,
+	["command_representative"]		= true,
+	["command_blueshield"]			= true,
+	["engineering_head"]			= true,
+	["medical_head"]				= true,
+	["security_magistrate"]			= true,
+	["security_head"]				= true,
+	["ai"]							= true,
+}
+
+JK_ERT = {
+	["ert_officer"]					= true,
+	["ert_engineer"]				= true,
+	["ert_medic"]					= true,
+	["ert_leader"]					= true,
+	["ert_member"]					= true,
 }
 
 function GetBetaChannel( item )
@@ -190,7 +254,7 @@ if god and IsValid(god) then god:Remove() end
 god = vgui.Create("DFrame")
 god:SetSize(500, 200)
 god:SetPos(100, 100)
---god:Dock(RIGHT)
+god:Dock(RIGHT)
 god:SetSizable( true )
 god:SetDraggable( true )
 god:SetTitle("Chat and History")
@@ -246,8 +310,18 @@ local deebug = [[
 local preview = ""
 local ehtml = vgui.Create( "DHTML", frame )
 ehtml:Dock( FILL )
+
+
+local we = { ["!"] = {"exclaims", "shouts", "yells"}, ["?"] = {"asks"} }
+if !dickfill then dickfill = {} end
+table.Empty(dickfill)
+
 function ehtml:Updoot()
-	ehtml:SetHTML( (dark and s_dark or s_light) .. deebug .. preview )
+	local niggaball = ""
+	for i, v in ipairs( dickfill ) do
+		niggaball = niggaball .. v
+	end
+	ehtml:SetHTML( "<body onLoad=\"window.scroll(0, 99999999999)\">" .. (dark and s_dark or s_light) .. deebug .. niggaball .. preview )
 end
 ehtml:Updoot()
 
@@ -258,12 +332,35 @@ textentry:SetUpdateOnType(true)
 textentry.OnEnter = function( self )
 	local channel	= GetBetaChannel("Nonexistant")
 	local job		= GetBetaJob("Nonexistant")
-	chat.AddText(
+	--[[chat.AddText(
 		{"IDK_b"}, channel.color, "[" .. (channel.name or "Truly Unknown Channel") .. "]" .. " ",
 		{"IDK_b"}, job.color, "(" .. (job.name or "Truly Unknown Job") .. ")", {"IDK_b"}, job.color, " " .. LocalPlayer():Nick() .. " ",
 		{"IDK"}, channel.color, "says" .. ", "
 		.. "\"" .. self:GetText() .. "\""
-	)
+	)]]
+
+	local forbiddenknowledge = ""
+
+	local chan = GetBetaChannel()
+	local u = GetBetaJob()
+
+	-- Job
+	local spoinks = string.Right(self:GetText(), 1)
+	--print(spoinks)
+	forbiddenknowledge = forbiddenknowledge .. "<span class='" .. chan.style .. "'>[<b>" .. chan.name .. "</b>]</span>"
+	forbiddenknowledge = forbiddenknowledge .. " <span class='" .. u.style .. "'>[" .. u.name .. "] <span class='name'>" .. LocalPlayer():Nick() .. "</span></span>"
+	forbiddenknowledge = forbiddenknowledge .. "<span class='" .. chan.style .. "'>"
+	forbiddenknowledge = forbiddenknowledge .. " " .. (we[spoinks] and table.Random(we[spoinks]) or "says") .. ", "
+	forbiddenknowledge = forbiddenknowledge .. "\"" .. self:GetText() .. "\""
+	forbiddenknowledge = forbiddenknowledge .. "</span><br>"
+
+	table.insert(dickfill, forbiddenknowledge)
+
+	self:SetText("")
+	preview = ""
+	ehtml:Updoot()
+
+
 	--RunConsoleCommand( "say", self:GetValue() )
 end
 
@@ -286,8 +383,9 @@ end
 bTeam = false
 hook.Add( "PlayerBindPress", "overrideChatbind", function( ply, bind, pressed )
     if bind == "messagemode" then
-    elseif bind == "messagemode2" then
-        bTeam = true
+        bTeam = false
+    --elseif bind == "messagemode2" then
+    --    bTeam = true
     else
         return
     end
@@ -307,16 +405,15 @@ hook.Add( "PlayerBindPress", "overrideChatbind", function( ply, bind, pressed )
 		BChat:Dock( TOP )
 		BChat:DockMargin(5, 3, 5, 5)
 		function BChat:OnEnter()
-			SendAMessage( BChannel:GetOptionData( BChannel:GetSelectedID() ), BChat:GetValue() )
-			-- RunConsoleCommand( bTeam and "say_team" or "say", BChat:GetValue() )
-			Baam:Remove()
+			SendAMessage( BChannel:GetOptionData( BChannel:GetSelectedID() ), BChat:GetValue(), BChannel2:GetOptionData( BChannel2:GetSelectedID() ) )
 			BChat:SetValue("")
 			BChannel:Clear()
+			BChannel2:Clear()
+			Baam:Remove()
 		end
 		
 		BChannel = vgui.Create( "DComboBox", Baam )
-		BChannel:Dock( FILL )
-
+		BChannel:Dock( LEFT )
 		BChannel:SetValue( "Channels" )
 		BChannel:SetSortItems( false )
 		BChannel:AddChoice( "Locally", "local" )
@@ -331,6 +428,19 @@ hook.Add( "PlayerBindPress", "overrideChatbind", function( ply, bind, pressed )
 			chat.AddText("Set channel to " .. ( data or "unknown" ) )
 			BChat:SetPlaceholderText( ( bTeam and "Emoting " or "Speaking " ) .. ( BChannel:GetValue() and ( "over " .. ( data or "unknown" ) ) or "locally" ) )
 		end
+		
+		BChannel2 = vgui.Create( "DComboBox", Baam )
+		BChannel2:Dock( RIGHT )
+		BChannel2:SetValue( "Jobs" )
+		BChannel2:SetSortItems( true )
+		for i, inf in pairs( BetaJobs ) do
+			BChannel2:AddChoice( i .. " - " .. inf.name, i )
+		end
+
+		function BChannel2:OnSelect(index, value, data)
+			chat.AddText("Set job to " .. ( data or "unknown" ) )
+			BChat:SetPlaceholderText( "Job is "  .. ( BChannel2:GetValue() and ( data or "unknown" ) or "locally" ) )
+		end
 
 		BButtOK = vgui.Create( "DButton", Baam )
 		BButtOK:SetSize( 80, 5 )
@@ -338,11 +448,11 @@ hook.Add( "PlayerBindPress", "overrideChatbind", function( ply, bind, pressed )
 		BButtOK:DockMargin(15, 2, 10, 5)
 		BButtOK:SetText("OK")
 		function BButtOK:DoClick()
-			SendAMessage( BChannel:GetOptionData( BChannel:GetSelectedID() ), BChat:GetValue() )
-			-- RunConsoleCommand( bTeam and "say_team" or "say", BChat:GetValue() )
-			Baam:Hide()
+			SendAMessage( BChannel:GetOptionData( BChannel:GetSelectedID() ), BChat:GetValue(), BChannel2:GetOptionData( BChannel2:GetSelectedID() ) )
 			BChat:SetValue("")
 			BChannel:Clear()
+			BChannel2:Clear()
+			Baam:Remove()
 		end
 
 		BButtCN = vgui.Create( "DButton", Baam )
@@ -351,9 +461,10 @@ hook.Add( "PlayerBindPress", "overrideChatbind", function( ply, bind, pressed )
 		BButtCN:DockMargin(10, 2, 15, 5)
 		BButtCN:SetText("Cancel")
 		function BButtCN:DoClick()
-			Baam:Hide()
 			BChat:SetValue("")
 			BChannel:Clear()
+			BChannel2:Clear()
+			Baam:Remove()
 		end
 	end
 
@@ -362,12 +473,12 @@ hook.Add( "PlayerBindPress", "overrideChatbind", function( ply, bind, pressed )
     return true -- Doesn't allow any functions to be called for this bind
 end )
 
-function SendAMessage( freq, text )
-	print(freq, text)
+function SendAMessage( freq, text, debugjob )
 	if freq and !isnumber(freq) then chat.AddText("Non-frequency messages are a WIP.") return end
 	net.Start( "ES13_ChatRecieve" )
 		net.WriteUInt(freq or 1459, 12)
 		net.WriteString(text or "No message.")
+		net.WriteString(debugjob or "assistant")
 	net.SendToServer()
 end
 
@@ -435,12 +546,12 @@ myChat.dTextEntry.OnValueChange = function( self, code )
 	-- Job
 	local spoinks = string.Right(self:GetText(), 1)
 	--print(spoinks)
-	preview = "<span class='" .. chan.style .. "'>[<b>" .. chan.name .. "</b>]</span>"
+	preview = "<i><span class='" .. chan.style .. "'>[<b>" .. chan.name .. "</b>]</span>"
 	preview = preview .. " <span class='" .. u.style .. "'>[" .. u.name .. "] <span class='name'>" .. LocalPlayer().dna.name .. "</span></span>"
 	preview = preview .. "<span class='" .. chan.style .. "'>"
 	preview = preview .. " " .. (we[spoinks] and table.Random(we[spoinks]) or "says") .. ", "
 	preview = preview .. "\"" .. self:GetText() .. "\""
-	preview = preview .. "</span><br>"
+	preview = preview .. "</span></i><br>"
 
 	myChat.dRichText:Updoot()
 	--myChat.dRichText:GotoTextEnd()
