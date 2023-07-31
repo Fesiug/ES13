@@ -330,7 +330,7 @@ function GM:CalcView( ply, pos, angles, fov )
 			view.drawviewer = true
 			view.angles = Angle( 90, 90, 0 )
 			view.fov = 64
-			--view.fov = Convert( 64, (9/16) ) -- Punish widescreen
+			-- view.fov = Convert( 64, (9/16) ) -- Punish widescreen
 
 			local posInQuotationMarks = ply:GetPos() - Vector( 0, 0, 0.031250 ) --Vector( ply:GetPos().x, ply:GetPos().y, 0 )
 			view.origin = posInQuotationMarks + Vector( 0, 0, 1024 )

@@ -1,0 +1,10 @@
+Patch
+{
+	include materials/es13/world/ref.vmt
+	insert
+	{
+		$basetexture				"es13/world/wall/glass_reinforced"
+		$surfaceprop				glass
+		$translucent				1
+	}
+}

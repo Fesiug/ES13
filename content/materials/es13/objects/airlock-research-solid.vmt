@@ -1,0 +1,10 @@
+Patch
+{
+	include materials/es13/world/ref.vmt
+	insert
+	{
+		$basetexture				"es13/objects/airlock-research-solid"
+		$surfaceprop				solidmetal
+		$alphatest					0
+	}
+}

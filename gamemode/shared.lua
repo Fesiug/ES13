@@ -44,9 +44,9 @@ function GM:PlayerNoClip( ply, desiredState )
 end
 
 local speeds = {
-	[1] = 115,
-	[2] = 150,
-	[3] = 200,
+	[1] = 64 * 1.5, --	64 * 1.796875,	-- 115,
+	[2] = 64 * 2.25, --	64 * 2.34375,	-- 150,
+	[3] = 64 * 3, --	64 * 3.125,		-- 200,
 }
 
 hook.Add( "CreateMove", "ES13_CreateMove", function( cmd )
@@ -102,30 +102,58 @@ local walk = {
 	[2] = ACT_MP_RUN,
 	[3] = ACT_MP_RUN,
 }
+local walk2 = {
+	[1] = "walk",
+	[2] = "walk",
+	[3] = "run",
+}
 function GM:CalcMainActivity(ply, velocity)
 	ply.CalcIdeal = ACT_MP_STAND_IDLE
 	ply.CalcSeqOverride = -1
 
-	self:HandlePlayerLanding( ply, velocity, ply.m_bWasOnGround )
+	local anii = "idle"
 
-	if !( self:HandlePlayerNoClipping( ply, velocity ) ||
+	--self:HandlePlayerLanding( ply, velocity, ply.m_bWasOnGround )
+	--[[if !( self:HandlePlayerNoClipping( ply, velocity ) ||
 		self:HandlePlayerDriving( ply ) ||
 		self:HandlePlayerVaulting( ply, velocity ) ||
 		self:HandlePlayerJumping( ply, velocity ) ||
 		self:HandlePlayerSwimming( ply, velocity ) ||
-		self:HandlePlayerDucking( ply, velocity ) ) then
-
-		local len2d = velocity:Length2DSqr()
-		if len2d != 0 then ply.CalcIdeal = walk[ply:GetDesiredSpeed()] end
+		false ) then --self:HandlePlayerDucking( ply, velocity ) ) then
 		--if ( len2d >= (140) ) then ply.CalcIdeal = ACT_MP_RUN elseif ( len2d > 0.25 ) then ply.CalcIdeal = ACT_MP_WALK end
+	end]]
 
-	end
-
+	local len2d = velocity:Length2DSqr()
+	if len2d != 0 then anii = walk2[ply:GetDesiredSpeed()] end -- ply.CalcIdeal = walk[ply:GetDesiredSpeed()] end
+	ply:SetSequence( anii )
 	ply.m_bWasOnGround = ply:IsOnGround()
 	ply.m_bWasNoclipping = ( ply:GetMoveType() == MOVETYPE_NOCLIP && !ply:InVehicle() )
 
 	return ply.CalcIdeal, ply.CalcSeqOverride
 end
+
+hook.Add( "PlayerPostThink", "ES13_PlayerPostThink", function(ply)
+	if true then
+		ply:SetPoseParameter( "pp_es13_look_pitch", ply:EyeAngles().p / 90 )
+
+		local yog = ply:EyeAngles().y
+		local FUCK = (ply:GetRenderAngles().y - yog)/90
+		if math.abs(FUCK) > 1 then yog = -yog FUCK = (yog - ply:GetRenderAngles().y)/90 end
+
+		ply:SetPoseParameter( "pp_es13_look_yaw", FUCK )
+
+		local p = ply
+		local w = ply:GetActiveWeapon()
+		if IsValid(w) and w:GetClass() == "es_weaponhandler" then
+			local count = 0
+			
+			if p.GetWEPRH and p:GetWEPRH() and ES:GetWeaponInfo(p:GetWEPRH()) then count = count + 1 end
+			if p.GetWEPLH and p:GetWEPLH() and ES:GetWeaponInfo(p:GetWEPLH()) then count = count + 1 end
+
+			ply:SetPoseParameter( "pp_es13_wield", count )
+		end
+	end
+end)
 
 local lut = {
 	[IN_ZOOM] = function( ply, key )

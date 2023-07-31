@@ -1,0 +1,9 @@
+Patch
+{
+	include materials/es13/world/ref.vmt
+	insert
+	{
+		$basetexture				"es13/world/floor/freezerfloor"
+		$surfaceprop				tile
+	}
+}
